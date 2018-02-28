@@ -1,0 +1,5 @@
+#!/bin/bash
+# adds double quote to each line in stdin
+# usage: cat <file> | quotify 
+
+perl -ne 'chomp;@F= split /\t/; @M=(); foreach(@F){push(@M,"\"".$_."\"")};print join(",",@M)."\n";'
