@@ -1,0 +1,6 @@
+#!/bin/bash
+# Find distro version, no matter where you are
+
+set -x
+
+cat /etc/*-release
