@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=- $@ 2>/dev/null
