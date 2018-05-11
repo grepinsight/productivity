@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Use the name of the folder
+
+CURRENT_DIR=$(pwd -P)
+R_RPOJ_NAME=$(basename $CURRENT_DIR).Rproj
+
+if [[ ! -e $R_RPOJ_NAME ]]; then
+echo "Version: 1.0
+
+RestoreWorkspace: Default
+SaveWorkspace: Default
+AlwaysSaveHistory: Default
+
+EnableCodeIndexing: Yes
+UseSpacesForTab: Yes
+NumSpacesForTab: 2
+Encoding: UTF-8
+
+RnwWeave: Sweave
+LaTeX: pdfLaTeX
+
+BuildType: Makefile" > ${R_RPOJ_NAME}
+    if [ $? -eq 0 ]; then
+      echo "$R_RPOJ_NAME has been created @ ${CURRENT_DIR} !"
+      exit 0
+    fi
+else 
+    echo "$R_RPOJ_NAME already exists. Delete it prior to running this command."
+fi
