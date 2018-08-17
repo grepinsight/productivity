@@ -1,0 +1,5 @@
+#!/bin/bash
+# simple note taking app
+
+
+cat ~/.bash_eternal_history | tail -1 | perl -lane 'print join(" ", @F[6..$#F])' >> notes
