@@ -1,0 +1,3 @@
+#!/bin/bash
+
+todoist l | grep http | fzf | grep -o http.* | strip_color | xargs open
