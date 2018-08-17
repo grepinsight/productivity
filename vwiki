@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+ttys_result=$(find_ttys $HOME/vimwiki/.index.wiki.swp)
+
+if [[ ! -z $ttys_result ]]; then
+
+	session_name=$(tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index} #{pane_tty}' | grep $ttys_result | awk '{print $1}')
+
+	tmux switch -t $session_name
+else
+	vim $HOME/vimwiki/index.wiki
+fi
