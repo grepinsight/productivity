@@ -1,0 +1,3 @@
+#!/bin/bash
+
+git rebase -i HEAD~$(git ls-unpushed | wc -l | strip.pl)

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+git status -s | grep ?? | awk '{print $2}' | fzf --preview 'head -n 100 {}'
