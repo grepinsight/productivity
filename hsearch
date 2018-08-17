@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat ~/.bash_eternal_history  | fzf | gcut -c1-49 --complement
