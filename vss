@@ -1,0 +1,3 @@
+#!/bin/bash
+
+vim $(git status -s | grep -v ??| awk '{print $2}' | tr '\n' ' ')
