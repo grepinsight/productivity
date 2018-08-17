@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sfood "$1" | \
+  sfood-graph | \
+  grep -v 'test' | \
+  grep -v 'numpy' | \
+  egrep -v '.so$' | \
+  egrep -v 'stor|random.py|yaml|math.so|logging|os.py|pandas|matplotlib|pyplot|argparse.py|hashlib.py|time.so|scipy|cPickle|re.py|functools|raven|string.py|gzip.py|sys|attr|warnings.py|itertools.so|multiprocessing|sklearn|copy.py|subprocess.py|base64.py|socket.py|tempfile.py|pkg_resources|os.path|glob.py|pickle.py|json|six.py|pylab|seaborn|errno|xmlrpclib|jinja2|requests|uuid.py|pytz|contextlib.py|operator.so|collections'| \
+  egrep -v '^(json|os.path|pickle.py|base64.py|pkg_resources|glob.py|collections.py|copy.py|shutil.py|socket.py|getpass.py)$' | \
+  dot -Tpdf > dot.pdf && open dot.pdf 
