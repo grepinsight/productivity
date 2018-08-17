@@ -1,0 +1,2 @@
+#!/bin/bash
+$(which ls) $HOME/.tmuxp | perl -ne 's/\.ya?ml//; print if $_ !~ /\./'
