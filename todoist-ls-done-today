@@ -1,0 +1,3 @@
+#!/bin/bash
+
+todoist completed-list | grep $(gdate "+%y/%m/%d") | tac
