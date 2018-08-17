@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pandoc REPORT.md -t beamer -o REPORT.pdf && open REPORT.pdf
