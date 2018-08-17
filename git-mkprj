@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Making a directory based on a branch name"
+set -eux
+mkdir -p $HOME/prj/$(git rev-parse --abbrev-ref HEAD)
+
