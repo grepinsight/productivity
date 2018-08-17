@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ps -o tty= -p $(lsof -t $1 2>/dev/null ) 2>/dev/null
