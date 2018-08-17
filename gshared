@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gdrive list --query "sharedWithMe"

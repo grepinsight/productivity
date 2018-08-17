@@ -1,0 +1,11 @@
+#!/bin/bash
+
+RESOLVED_URL=$(cat /Users/alee/Library/Application\ Support/Google/Chrome/Default/Bookmarks | jq '[.. | {"name": .name?, "url":.url?}]'  | jq '[.[] | select(.url != null)] ' | jq  -r '.[] | .name, .url' | paste - - | sort | uniq | fzf | perl -ne 'm/(https?:\/\/.*)/; print $1."\n"')
+
+
+if [[ "$1" == "-p" ]]; then
+	#statements
+	echo ${RESOLVED_URL}
+else
+	open ${RESOLVED_URL} 2>/dev/null
+fi
