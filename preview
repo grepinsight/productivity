@@ -1,0 +1,3 @@
+#!/bin/bash
+
+fd -E '*.pyc' -E '__pycache__' | fzf --preview 'head -n 100 {}'
