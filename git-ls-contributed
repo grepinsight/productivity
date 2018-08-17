@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ "$1" == "branch" ]]; then
+	#statements
+	git ls-files | xargs -i git_blameable_by_commits.sh "Albert Lee" {}
+else
+	git ls-files | xargs -i git_blameable.sh "Albert Lee" {}
+fi
