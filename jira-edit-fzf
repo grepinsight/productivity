@@ -1,0 +1,11 @@
+#!/bin/bash
+# select jira ticket to edit
+
+
+JIRA_ID=$(jira mine2 | fzf | cut -f1 -d:)
+
+echo $JIRA_ID
+if [[ ${JIRA_ID} == *-* ]];then
+	jira edit ${JIRA_ID}
+fi
+
