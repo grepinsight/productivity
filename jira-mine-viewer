@@ -1,0 +1,4 @@
+#!/bin/bash
+# Preview jira tickets contents
+
+jira mine2 | fzf --preview "jira view \$(echo {} | cut -f1 -d:)"
