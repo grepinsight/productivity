@@ -69,7 +69,7 @@ def main():
         cmd = cmd + ' ' + project_flag
 
     if due_date:
-        cmd = cmd + ' ' + '--date ' + due_date
+        cmd = cmd + ' ' + '--date ' + "'" + due_date + "'"
 
     cmd = cmd + ' ' + "'" + task + "'"
 

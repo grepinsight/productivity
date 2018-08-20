@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "--- JIRA ---"
+jira mine
+
+echo "--- TODOIST ---"
+todoist sync && todoist list | egrep -v "recurring|NiceToHave|Insighty-Life|Home|morning_routine"
