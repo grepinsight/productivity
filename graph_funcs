@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PYTHON_SCRIPT="$1"
+OUTPUT_PREFIX="graph--$(echo $PYTHON_SCRIPT | tr '/' '_')"
+OUTPUT_DOT="graph--$(echo $PYTHON_SCRIPT | tr '/' '_').dot"
+OUTPUT_PDF="${OUTPUT_PREFIX}.pdf"
+cat "$1" | construct_call_graph.py | tee ${OUTPUT_DOT} | dot -Tpdf > ${OUTPUT_PDF}
