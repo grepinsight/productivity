@@ -1,0 +1,10 @@
+#!/bin/bash
+
+TODOIST_ITEM=$(todoist list | fzf )
+PROJECT_ID=$(echo ${TODOIST_ITEM}| awk '{print $1}')
+
+if [[ ! -z ${PROJECT_ID} ]]; then
+	echo ${TODOIST_ITEM}
+	todoist close ${PROJECT_ID}
+fi
+
