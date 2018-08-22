@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "--- Agenda ---"
+gcalcli-agenda-today
+
 echo "--- QUESTIONS ---"
 todoist list  | grep @question
 
