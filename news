@@ -1,0 +1,4 @@
+#!/bin/bash
+
+instantnews -n the-wall-street-journal
+instantnews -n reddit-r-all
