@@ -12,4 +12,8 @@ echo "--- JIRA ---"
 jira mine
 
 echo "--- TODOIST ---"
-todoist sync && todoist list | egrep -v "recurring|NiceToHave|Insighty-Life|Home|morning_routine"
+todoist sync && todoist list | egrep -v "recurring|NiceToHave|Insighty-Life|Home|morning_routine|family"
+
+echo "--- Git Summaries"
+git summaries
+
