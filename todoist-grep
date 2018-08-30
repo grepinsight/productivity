@@ -1,0 +1,3 @@
+#!/bin/bash
+
+todoist sync && todoist list | grep -i "$1"
