@@ -6,7 +6,7 @@ gcalcli-agenda-today
 echo "--- QUESTIONS ---"
 todoist list  | grep @question
 
-rg -i question -l ~/vimwiki
+rg '\[ \]' ~/vimwiki
 
 echo "--- JIRA ---"
 jira mine
