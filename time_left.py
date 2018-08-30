@@ -87,10 +87,10 @@ def main(*,
 
     if(my_time > time_now):
         time_delta = strfdelta(my_time - time_now, out_format)
-        print('{}'.format(time_delta))
+        print('{} left'.format(time_delta))
     else:
         time_delta = strfdelta(time_now - my_time, out_format)
-        print('{}'.format(time_delta))
+        print('{} passed'.format(time_delta))
 
 
 if __name__ == '__main__':
