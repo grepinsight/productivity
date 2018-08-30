@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# time_left.py --time 15:00 --format '%H:%M'
+# time_left.py --time 15:00 --format_time '%H:%M'
 
 import defopt
 from datetime import datetime
