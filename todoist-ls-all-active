@@ -3,16 +3,19 @@
 echo "--- Agenda ---"
 gcalcli-agenda-today
 
+echo
 echo "--- QUESTIONS ---"
 todoist list  | grep @question
 
 rg '\[ \]' ~/vimwiki
 
+echo
 echo "--- JIRA ---"
 jira mine
 
+echo
 echo "--- TODOIST ---"
-todoist sync && todoist list | egrep -v "recurring|NiceToHave|Insighty-Life|Home|morning_routine|family"
+todoist sync && todoist list | egrep -v "recurring|NiceToHave|Insighty-Life|Home|morning_routine|family|Entertainment"
 
 echo "--- Git Summaries"
 git summaries
