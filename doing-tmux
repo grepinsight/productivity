@@ -1,6 +1,9 @@
 #!/bin/bash
 
 doing_tmux=$(doing view tmux)
+doing_tmux_time=$(echo $doing_tmux | cut -f 1 -d '|' | strip.pl)
+
+doing_tmux=$doing_tmux" -- "$(time_left.py -t "${doing_tmux_time}" -f '%Y-%m-%d %I:%M%p' -o '{H}h {M}m')
 if [[ $doing_tmux != *@done* ]]; then
 	echo $doing_tmux
 else
