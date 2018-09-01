@@ -1,7 +1,11 @@
 #!/bin/bash
 
 if which $1; then
-    cat $(which $1)
+	if which bat > /dev/null; then
+		bat $(which $1)
+	else
+		cat $(which $1)
+	fi
 else
     echo "$1 does not exist in PATH"
 fi
