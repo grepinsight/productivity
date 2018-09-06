@@ -1,0 +1,9 @@
+#!/bin/bash
+
+body() {
+    IFS= read -r header
+    printf '%s\n' "$header"
+    "$@"
+}
+
+body "$@"
