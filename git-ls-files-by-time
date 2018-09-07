@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DIRS_TO_SEARCH=$1
+
+if [[ -z $DIRS_TO_SEARCH ]]; then
+	DIRS_TO_SEARCH="."
+fi
+find $DIRS_TO_SEARCH -type d -name .git | xargs -i greadlink -m {} | xargs -i dirname {}  | xargs -i git-ls-timestamped-from-repo -H {}

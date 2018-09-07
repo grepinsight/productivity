@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SHOW_FILENAME=0
+FILENAME=""
+
+while true; do
+	case "$1" in
+	    -H) SHOW_FILENAME=1; shift ;;
+		*) break;;
+	esac
+done
+
+if [[ $SHOW_FILENAME == 1 ]]; then
+	FILENAME=$(basename $1)":"
+fi
+
+if cd "$1"; then
+	if [[ -d .git ]]; then
+		git ls-files -z | xargs -0 -n1 -I{} -- git log -1 --format="${FILENAME}%ai {}" {}
+	fi
+fi
