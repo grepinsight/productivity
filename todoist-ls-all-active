@@ -7,7 +7,7 @@ echo
 echo "--- QUESTIONS ---"
 todoist list  | grep @question
 
-rg '\[ \]' ~/vimwiki
+rg '\[ \]' ~/Dropbox/vimwiki
 
 echo
 echo "--- JIRA ---"
@@ -19,4 +19,8 @@ todoist sync && todoist list | egrep -v "recurring|NiceToHave|Insighty-Life|Home
 
 echo "--- Git Summaries"
 git summaries
+
+echo "--- Files changed"
+git-ls-files-by-time ~/prj   | grep $(date +"%Y-%m-%d")
+git-ls-files-by-time ~/Dropbox/vimwiki   | grep $(date +"%Y-%m-%d")
 
