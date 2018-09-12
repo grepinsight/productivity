@@ -9,5 +9,5 @@ if [[ ! -z $ttys_result ]]; then
 
 	tmux switch -t $session_name
 else
-	vim $HOME/vimwiki/diary/${today}.wiki
+	vim $HOME/Dropbox/vimwiki/diary/${today}.md
 fi

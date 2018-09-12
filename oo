@@ -1,0 +1,3 @@
+#!/bin/bash
+
+open "$(fasd -f | fzf | perl -lane 'print join(" ",@F[1..$#F])')"

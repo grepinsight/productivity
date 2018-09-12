@@ -1,0 +1,4 @@
+#!/bin/bash
+
+vim "$(fasd -f | fzf | perl -lane 'print join(" ",@F[1..$#F])')"
+
