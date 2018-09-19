@@ -7,7 +7,7 @@ echo
 echo "--- QUESTIONS ---"
 todoist list  | grep @question
 
-rg '\[ \]' ~/Dropbox/vimwiki
+rgtodo
 
 echo
 echo "--- JIRA ---"
