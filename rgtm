@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rg -t markdown -g '!miniconda2' "$1" ~
