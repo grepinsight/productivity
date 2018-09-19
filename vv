@@ -1,4 +1,12 @@
 #!/bin/bash
 
-vim "$(fasd -f | fzf | perl -lane 'print join(" ",@F[1..$#F])')"
+SELECTED_FILE="$(fasd -f | fzf | perl -lane 'print join(" ",@F[1..$#F])')"
+
+
+if [[ ! -z ${SELECTED_FILE}  ]]; then
+	#statements
+	fasd --add  "$SELECTED_FILE"
+	vim "$SELECTED_FILE"
+fi
+
 
