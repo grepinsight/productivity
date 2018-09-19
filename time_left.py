@@ -66,6 +66,7 @@ def main(*,
     :param str time: Number of times to display the greeting
     :param str format_time: Number of times to display the greeting
     :param str out_format: output format
+    :param bool stdout: whether to print to stdout
     """
 
     time_now = datetime.now()

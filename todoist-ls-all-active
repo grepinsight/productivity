@@ -15,7 +15,7 @@ jira mine
 
 echo
 echo "--- TODOIST ---"
-todoist sync && todoist list | egrep -v "recurring|NiceToHave|Insighty-Life|Home|morning_routine|family|Entertainment" | sort -k3,3 | python todoist-time-left.py
+todoist-work
 
 echo "--- Git Summaries"
 git summaries
