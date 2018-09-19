@@ -60,7 +60,7 @@ def strfdelta(tdelta,
 def main(*,
          time="15:00",
          format_time="%H:%M",
-         out_format='{D:02}d {H:02}h {M:02}m {S:02}s'):
+         out_format='{D:02}d {H:02}h {M:02}m {S:02}s', stdout=True):
     """Display a friendly greeting.
 
     :param str time: Number of times to display the greeting
@@ -87,10 +87,13 @@ def main(*,
 
     if(my_time > time_now):
         time_delta = strfdelta(my_time - time_now, out_format)
-        print('{} left'.format(time_delta))
+        output = '{} left'.format(time_delta)
     else:
         time_delta = strfdelta(time_now - my_time, out_format)
-        print('{} passed'.format(time_delta))
+        output = '{} passed'.format(time_delta)
+    if stdout:
+        print(output)
+    return str(output)
 
 
 if __name__ == '__main__':
