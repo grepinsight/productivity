@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rg '\[ \]' ~/Dropbox/vimwiki
+
