@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for i in $(tmsu-list-dirs); do
+	cd $i > /dev/null; tmsu files "$1" 2> /dev/null | xargs -i greadlink -m {}; cd - > /dev/null
+done
+

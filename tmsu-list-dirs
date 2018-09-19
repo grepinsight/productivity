@@ -1,0 +1,5 @@
+#!/bin/bash
+# list all tmsu tracked directories
+
+fd -t d -I -H --fixed-strings '.tmsu' ~ | grep '\/.tmsu$' | strip_color  | perl -pe 's/.tmsu$//'
+

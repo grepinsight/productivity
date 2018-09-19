@@ -1,0 +1,17 @@
+#!/bin/bash
+
+TMSU_INDEX_PATH="$HOME/.tmsuindex"
+
+# First time
+if [[ ! -e $TMSU_INDEX_PATH ]]; then
+	tmsu-reindex
+fi
+
+# if the $TMSU_INDEX_PATH is older than 15 minutes
+if [[ $(find $TMSU_INDEX_PATH -mmin +15 -print) ]]; then
+	tmsu-reindex
+else
+	# use the cache
+	cat $TMSU_INDEX_PATH
+fi
+

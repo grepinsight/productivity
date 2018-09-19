@@ -1,0 +1,4 @@
+#!/bin/bash
+
+tmsu-index | cut -f1 | sort | uniq
+

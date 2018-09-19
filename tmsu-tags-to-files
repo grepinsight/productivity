@@ -1,0 +1,5 @@
+#!/bin/bash
+
+tmsu tags | tr ' ' '\n' | xargs -i echo "tmsu files {} | xargs -i greadlink -m \{\} | quotify | awk -v tag={} '{print tag\"\t\"\$0}'"  | bash
+
+

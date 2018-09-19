@@ -1,0 +1,13 @@
+#!/bin/bash
+
+TMSU_INDEX_PATH="$HOME/.tmsuindex"
+
+reindex() {
+	for i in $(tmsu-list-dirs); do
+		cd $i > /dev/null;
+		tmsu-tags-to-files
+		cd - > /dev/null
+	done > ${TMSU_INDEX_PATH}
+	exit 0
+}
+reindex
