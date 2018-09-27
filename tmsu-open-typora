@@ -1,0 +1,8 @@
+#!/bin/bash
+
+SELECTED_FILE="$(tmsu-index | fzf -m | cut -f2 )"
+
+if [[ ! -z ${SELECTED_FILE} ]]; then
+	echo "${SELECTED_FILE}" | xargs typora
+fi
+
