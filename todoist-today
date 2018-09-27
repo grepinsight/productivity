@@ -1,7 +1,13 @@
 #!/bin/bash
 
 
-todoist_today_entry=$(todoist sync && todoist --color l -f 'today' |  perl -pe 's/^\d+ p. \d{2}\/\d{2}\/\d{2}//' | sort | head -1 | tr '#' '@' |  perl -pe 's/\s{2,}/ -> /')
+todoist_today_entry=$(todoist sync && todoist --color l -f 'today' |  \
+	perl -pe 's/^\d+ p. \d{2}\/\d{2}\/\d{2}//' | \
+	sort | \
+	grep -v '@recurring' | \
+	head -1 | \
+	tr '#' '@' |  \
+	perl -pe 's/\s{2,}/ -> /')
 
 time_left=$(time_left.py --out-format '|{H}H {M}M ' --time $(echo $todoist_today_entry | cut -f2 -d ' ') | perl -ne 'chomp; print $_ . "| "')
 
