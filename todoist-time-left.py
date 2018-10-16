@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import re
 import sys
 
@@ -14,7 +14,6 @@ from termcolor import colored
 # 2809943670 p1 18/09/20(Thu)       #Counsyl        @talks                      Give a talk at Compbio
 # 2795236634 p1 18/09/26(Wed) 19:30 #Social         @GCal                       Reservation at AL's Place
 # 2812040692 p1 18/09/26(Wed) 07:00 #Counsyl        @people                     @kdauria last day
-# 2798323368 p1 18/09/30(Sun) 20:00 #Social                                     nopa with 수찬
 
 
 TIME_PATTERN_0 = r'\d{2}\/\d{2}\/\d{2}\([A-Z][a-z][a-z]\)'

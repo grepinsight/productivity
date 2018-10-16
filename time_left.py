@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # time_left.py --time 15:00 --format_time '%H:%M' --out_format '%M'
 
 from string import Formatter
