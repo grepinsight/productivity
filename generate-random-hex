@@ -1,0 +1,10 @@
+#!/bin/bash
+
+IS_MAC=$(uname -a | grep Darwin)
+if [[ ! -z $IS_MAC ]];then
+	/bin/cat /dev/urandom | gtr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1
+else
+	/bin/cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1
+fi
+
+
