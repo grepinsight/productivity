@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+vim $(fd "$1" | grep doc)

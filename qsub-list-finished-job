@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+set -eux
+if tail -n 1 "$1" | grep done > /dev/null; then
+	qsub_err_log=$(qsub-find-pair "$1")
+	if [[ $(grep -l Error $qsub_err_log | wc -l) == 0 ]] ; then
+		echo "$1"
+	fi
+fi

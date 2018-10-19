@@ -1,0 +1,3 @@
+#!/bin/bash
+
+find "$1" -type f | xargs -i qsub-list-finished-job {} 2> /dev/null

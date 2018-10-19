@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+QSUB_OUTPUTFILE=$(qsub-list-outputfile "$1")
+QSUB_ERRORFILE=$(qsub-find-pair ${QSUB_OUTPUTFILE})
+
+if [[ -z $QSUB_OUTPUTFILE ]]; then
+	>&2 echo "$1 is not a valid EXP_ID"
+	exit 1
+fi
+
+if cat ${QSUB_OUTPUTFILE} | tail -n 1 | grep done > /dev/null; then
+	if grep Error ${QSUB_ERRORFILE} > /dev/null; then
+		echo "errored"
+	else
+		echo "done"
+	fi
+else
+	echo "running"
+fi

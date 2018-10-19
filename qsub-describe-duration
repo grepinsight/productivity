@@ -1,0 +1,16 @@
+#!/bin/bash
+
+QSUB_OUTPUTFILE=$(qsub-list-outputfile "$1")
+
+if [[ -z ${QSUB_OUTPUTFILE} ]]; then
+	echo "NA"
+fi
+
+duration_raw=$(tail -n 2 ${QSUB_OUTPUTFILE}| head -1)
+
+
+if [[ $duration_raw = *"hours"*  ]]; then
+	echo $duration_raw | perl -pe 's/ hours,/H/; s/ mins,/M/; s/ seconds/S/;s/ /-/g;'
+else
+	time_left.py --time $(qsub-describe-time $1) --format-time '%Y-%m-%dT%H-%M-%S' --out-format '{H}H-{M}M-passed'
+fi

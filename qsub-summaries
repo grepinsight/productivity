@@ -1,0 +1,10 @@
+#!/bin/bash
+
+qsub-list-experiments cluster/logs | \
+	xargs -i echo "echo "{}" && qsub-describe-time {} && qsub-describe-state {} && qsub-describe-duration {} && qsub-describe-desc {}" | \
+	bash | \
+	paste - - - - - | \
+	cat <(echo "uuid,time,state,duration,desc") -  | \
+	tr ',' '\t' | \
+	awk 'NR<2{print $0;next}{print $0| "sort -k2,2"}' | \
+	column -t

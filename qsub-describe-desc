@@ -1,0 +1,9 @@
+#!/bin/bash
+
+EXP_DOC=$(fd "$1" | grep docs )
+
+if [[ ! -z ${EXP_DOC} ]]; then
+	cat ${EXP_DOC} | grep TLDR -A 4 | strip.pl | grep -v '=' | grep -v 'TLDR' | tr '\n' '.' | cat - <(echo "") | tr ' ' '-' | tr ',' '-'
+else
+	echo "NA"
+fi

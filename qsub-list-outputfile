@@ -1,0 +1,2 @@
+#!/bin/bash
+qsub-list-associated "$1" | grep logs | egrep  '\.o[0-9]{7}'

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+
+# if error
+if echo "$1" | egrep "\.e[0-9]+$" > /dev/null; then
+	echo "$1" | perl -pe 's/\.e([0-9]+)/.o$1/'
+elif echo "$1" |  egrep "\.o[0-9]+$" > /dev/null; then
+	echo "$1" | perl -pe 's/\.o([0-9]+)/.e$1/'
+else
+	echo "Error!"
+fi
+
+
