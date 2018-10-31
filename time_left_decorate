@@ -1,0 +1,3 @@
+#!/bin/bash
+
+perl -MTerm::ANSIColor -ne 'chomp; @F=split /\t/;$cmd= "time_left.py -t " . $F[1] .  " -f \"%Y-%m-%d\""; $out=`$cmd`;chomp($out); print $_ . " (\e[1m".$out."\e[0m)". "\n"'
