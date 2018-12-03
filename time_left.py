@@ -77,8 +77,10 @@ def main(*,
             time = time + '|' + str(ref_data)
         return time, format_time
 
-    time, format_time = format_time_builder(time,
-                                            format_time, '%Y', time_now.year)
+    if '%y' not in format_time:
+        time, format_time = format_time_builder(time,
+                                                format_time,
+                                                '%Y', time_now.year)
     time, format_time = format_time_builder(time,
                                             format_time, '%m', time_now.month)
     time, format_time = format_time_builder(time,
