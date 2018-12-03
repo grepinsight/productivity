@@ -1,0 +1,3 @@
+#!/bin/bash
+
+todoist-work | grep passed | grep -v '#Routines'
