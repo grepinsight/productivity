@@ -1,0 +1,10 @@
+#!/bin/bash
+
+NUMBER_OF_FILES_FOUND=$(fd $1 | wc -l)
+if [[ $NUMBER_OF_FILES_FOUND -gt 1 ]] ;then
+	file_to_inspect=$(fd $1 | fzf | strip_color)
+else
+	file_to_inspect=$(fd $1 | strip_color)
+fi
+
+head $file_to_inspect
