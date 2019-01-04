@@ -1,10 +1,10 @@
 #!/bin/bash
 
 if [[ "$1" == "-l" ]]; then
-	rg -l --no-ignore '\[ \]' ~/vimwiki
+	rg -l --no-ignore '\[ \]' $MY_VIMWIKI_PATH
 elif [[ "$1" == "-v" ]]; then
   vim "$(todo_vimwiki -l | fzf)"
 else
-	rg --no-ignore '\[ \]' ~/vimwiki
+	rg --no-ignore '\[ \]' $MY_VIMWIKI_PATH
 fi
 
