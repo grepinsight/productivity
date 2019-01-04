@@ -1,0 +1,3 @@
+#!/bin/bash
+
+perl -ne 'm/\d{10}\s*(.*)$/; print $1."\n"'

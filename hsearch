@@ -1,3 +1,5 @@
 #!/bin/bash
 
-cat ~/.bash_eternal_history  | fzf | gcut -c1-49 --complement
+#cat ~/.bash_eternal_history  | fzf | gcut -c1-49 --complement
+cat ~/.bash_eternal_history  | perl -ne 'm/\d{10}\s*(.*)$/; print $1."\n"'  | LC_ALL=C sort | uniq | fzf
+

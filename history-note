@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cat ~/.bash_eternal_history | grep -w "echo 'n:"
+cat ~/.bash_eternal_history | grep -w 'echo "n:'

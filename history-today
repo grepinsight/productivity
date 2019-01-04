@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cat ~/.bash_eternal_history  | grep "$(gdate --iso)" | perl -ne 'm/@\s*(.*?)\s*\|/; print $1."\n"' | strip.pl | sort | uniq -c
+
+
