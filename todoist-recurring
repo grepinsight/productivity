@@ -1,0 +1,3 @@
+#!/bin/bash
+
+todoist --color list -f 'today' | sort -k4,4n | grep recurring
