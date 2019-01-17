@@ -1,0 +1,15 @@
+#!/bin/bash
+
+os_candiate=$(uname)
+if [[ $os_candiate == "Darwin" ]]; then
+	echo "It seems you are on Mac"
+	set -ex
+    system_profiler SPSoftwareDataType
+	set +ex
+	echo "-----"
+	set -ex
+	sw_vers
+	exit
+fi
+
+lsb_release -a
