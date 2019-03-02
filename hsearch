@@ -1,5 +1,44 @@
 #!/bin/bash
 
 #cat ~/.bash_eternal_history  | fzf | gcut -c1-49 --complement
-cat ~/.bash_eternal_history  | perl -ne 'm/\d{10}\s*(.*)$/; print $1."\n"'  | LC_ALL=C sort | uniq | fzf
+
+
+option="cat" # default option, doing nothing
+TODAY=$(date "+%Y-%m-%d")
+YESTERDAY=$(gdate -d "$TODAY -1 day" "+%Y-%m-%d")
+nofzf=0
+while true; do
+	#statements
+	case "$1" in
+		--today) option="grep $TODAY"; shift ;;
+		--yesterday) option="grep $YESTERDAY"; shift ;;
+		--here) option="grep $PWD"; shift ;;
+		--nofzf) nofzf=1; shift ;;
+		*) break;
+	esac
+done
+
+postprocess() {
+	perl -ne 'm/\d{10}\s*(.*)$/; print $1."\n"'  | \
+	LC_ALL=C sort | \
+	uniq | \
+	fzf
+}
+
+
+if [[ $nofzf == 1 ]]; then
+	search_result=`cat ~/.bash_eternal_history  | $option`
+else
+	search_result="$(cat ~/.bash_eternal_history  | \
+		$option |\
+		postprocess
+		)"
+fi
+
+
+echo "$search_result"
+
+if [[ $nofzf == 0 ]]; then
+echo "$search_result" | tr -d '\n' | pbcopy
+fi
 
