@@ -7,6 +7,7 @@ echo
 echo "--- QUESTIONS ---"
 todoist list  | grep @question
 
+echo "--- TODO items ---"
 rgtodo
 
 echo

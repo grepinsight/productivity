@@ -1,0 +1,3 @@
+#!/bin/bash
+
+fd '\.md$' | sed 's/\.md$//'| xargs -i echo "echo -en '{}\t';rg -l '\[\[{}\]\]' . | wc -l" | bash | awk -F"\t" '$2 == 0'

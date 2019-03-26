@@ -6,7 +6,8 @@ SELECTED_FILE="$(fasd -f | fzf | perl -lane 'print join(" ",@F[1..$#F])')"
 if [[ ! -z ${SELECTED_FILE}  ]]; then
 	#statements
 	fasd --add  "$SELECTED_FILE"
-	cd $(dirname $SELECTED_FILE)
+	echo "$SELECTED_FILE"
+	cd $(dirname "$SELECTED_FILE")
 	cd $(git rev-parse --show-toplevel)
 	vim "$SELECTED_FILE"
 fi

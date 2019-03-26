@@ -1,0 +1,3 @@
+#!/bin/bash
+
+egrep -v '(\.git|.DS_Store|\.Rproj\.user|.png$|.rds$|.csv$|.vcf$|.diff$|.concord$|\.snakemake|\.json$|\.Rhistory$|.ipynb$|\.Rproj$|.pkl$|\.tmsu|\.rstudio)'

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+todoist list | grep Inbox

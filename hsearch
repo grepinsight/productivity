@@ -10,9 +10,9 @@ nofzf=0
 while true; do
 	#statements
 	case "$1" in
-		--today) option="grep $TODAY"; shift ;;
-		--yesterday) option="grep $YESTERDAY"; shift ;;
-		--here) option="grep $PWD"; shift ;;
+		--today) option="$option | grep $TODAY"; shift ;;
+		--yesterday) option="$option | grep $YESTERDAY"; shift ;;
+		--here) option="$option | grep $PWD"; shift ;;
 		--nofzf) nofzf=1; shift ;;
 		*) break;
 	esac
@@ -25,20 +25,19 @@ postprocess() {
 	fzf
 }
 
-
 if [[ $nofzf == 1 ]]; then
-	search_result=`cat ~/.bash_eternal_history  | $option`
+	search_result="cat ~/.bash_eternal_history  | $option"
+	res=$(eval $search_result)
 else
-	search_result="$(cat ~/.bash_eternal_history  | \
-		$option |\
-		postprocess
-		)"
+	search_result="cat ~/.bash_eternal_history  | $option | postprocess"
+	res=$(eval $search_result)
 fi
+echo $res
 
 
-echo "$search_result"
+
 
 if [[ $nofzf == 0 ]]; then
-echo "$search_result" | tr -d '\n' | pbcopy
+	echo "$res" | tr -d '\n' | pbcopy
 fi
 

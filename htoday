@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+search_result="$(cat ~/.bash_eternal_history | \
+                	perl -ne 'm/\d{10}\s*(.*)$/; print $1."\n"'  | LC_ALL=C sort | uniq | fzf)"

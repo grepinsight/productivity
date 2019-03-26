@@ -1,0 +1,7 @@
+#!/bin/bash
+
+text=$(dx find data --path /allee 2>/dev/null | fzf | cut -c1-38 --complement | cut -f1 -d'(' | sed 's/\s*$//' )
+
+
+echo $text
+echo $text | tr -d '\n' | pbcopy
