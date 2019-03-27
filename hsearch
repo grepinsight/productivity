@@ -3,7 +3,7 @@
 #cat ~/.bash_eternal_history  | fzf | gcut -c1-49 --complement
 
 
-option="cat" # default option, doing nothing
+option="/bin/cat" # default option, doing nothing
 TODAY=$(date "+%Y-%m-%d")
 YESTERDAY=$(gdate -d "$TODAY -1 day" "+%Y-%m-%d")
 nofzf=0
@@ -13,6 +13,7 @@ while true; do
 		--today) option="$option | grep $TODAY"; shift ;;
 		--yesterday) option="$option | grep $YESTERDAY"; shift ;;
 		--here) option="$option | grep $PWD"; shift ;;
+		--directory) cat ~/.bash_eternal_history | grep -w $TODAY | cut -f2 -d@ | cut -f1 -d "|" | strip.pl | uniq | awk '!x[$0]++' | grep prj; exit;;
 		--nofzf) nofzf=1; shift ;;
 		*) break;
 	esac
