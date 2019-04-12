@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+toggl current | \
+	egrep 'Description|Duration' | \
+	cut --complement -c1-12 | \
+	paste - - | \
+	perl -pe 's/\t(.*)/ (\1)/'

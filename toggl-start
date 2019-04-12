@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+toggl start --project-id $(toggl projects | fzf | cut -f1 -d ' ') "$@"

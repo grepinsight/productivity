@@ -1,0 +1,3 @@
+#!/bin/bash
+
+todoist completed-list | grep $(gdate -d today +"%y/%m/%d") | grep -v '#Routines'
