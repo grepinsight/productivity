@@ -65,6 +65,12 @@ read_html_remdr <- function(remDr) {
     read_html()
 }
 
+navigate_html <- function(remDr, url, sleep=3) {
+  remDr$navigate(url)
+  Sys.sleep(sleep)
+  read_html_remdr(remDr)
+}
+
 find_elem <- function(remDr, selector) {
   remDr$findElement("css", selector)
 }
