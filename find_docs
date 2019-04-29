@@ -1,10 +1,18 @@
 #!/bin/bash
 
 
+if [[ "$1" == '.' ]]; then
+	cat \
+		<(find . -type f -name  "*.md" -printf "%T+\t%p\n") \
+		<(find . -type f -name  "*.Rmd" -printf "%T+\t%p\n") | \
+		sort -n
+else
+	cat \
+	<(find ~/Dropbox/vimwiki -type f -name  "*.md" -printf "%T+\t%p\n" -or -name "*.Rmd" -printf "%T+\t%p\n") \
+	<(find ~/prj -type f -name  "*.md" -printf "%T+\t%p\n") \
+	<(find ~/prj -type f -name  "*.Rmd" -printf "%T+\t%p\n") | \
+	sort -n | \
+	tail -20
 
-cat \
-<(find ~/Dropbox/vimwiki -type f -name  "*.md" -printf "%T+\t%p\n" -or -name "*.Rmd" -printf "%T+\t%p\n") \
-<(find ~/prj -type f -name  "*.md" -printf "%T+\t%p\n") \
-<(find ~/prj -type f -name  "*.Rmd" -printf "%T+\t%p\n") | \
-sort -n | \
-tail -20
+fi
+
