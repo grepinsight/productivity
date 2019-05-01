@@ -82,12 +82,3 @@ click <- function(webElem) {
   webElem$clickElement()
 }
 
-do_login <- function(r, url) {
-  r$navigate(url)
-  creds <- read_lines("~/src/alee/secrets.py") %>%
-    str_split(" = ") %>%
-    map(function(x) x[2]) %>%
-    gsub("'","",.)
-
-  login(remDr = r, id = creds[1], password = creds[2])
-}
