@@ -52,10 +52,11 @@ get_password <- function() {
   runGadget(ui, server, viewer = dialogViewer("Password", height = 200))
 }
 
-login <- function(remDr, id, password=get_password()) {
-  webElem <- remDr$findElement(using="css", value = "#id_username")
+login <- function(remDr, id, password=get_password(), 
+                  css_username="#id_username", css_password="#id_password") {
+  webElem <- remDr$findElement(using="css", value = css_username)
   webElem$sendKeysToElement(list(id))
-  webElem <- remDr$findElement(using="css", value = "#id_password")
+  webElem <- remDr$findElement(using="css", value = css_password)
   suppressWarnings(webElem$sendKeysToElement(list(password, key = "enter")))
 }
 
