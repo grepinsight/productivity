@@ -1,0 +1,7 @@
+#!/bin/bash
+
+content=$(rg '```\{r\}' -H -n . | fzf | awk -F: '{print "+"$2" "$1}')
+
+if [[ ! -z $content ]];then
+	  vim $content
+fi
