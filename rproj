@@ -20,11 +20,14 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
+AutoAppendNewline: Yes
+StripTrailingWhitespace: Yes
+
 BuildType: Makefile" > ${R_RPOJ_NAME}
     if [ $? -eq 0 ]; then
       echo "$R_RPOJ_NAME has been created @ ${CURRENT_DIR} !"
       exit 0
     fi
-else 
+else
     echo "$R_RPOJ_NAME already exists. Delete it prior to running this command."
 fi
