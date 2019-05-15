@@ -1,0 +1,3 @@
+#/bin/bash
+
+ls $HOME/prj | strip_color | fzf
