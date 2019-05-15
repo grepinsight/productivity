@@ -1,4 +1,14 @@
 #!/bin/bash
 
-rg '\[ \]' ~/Dropbox/vimwiki
+#rg -H -n '\[ \]' ~/Dropbox/vimwiki | fzf |
 
+
+while true; do
+	content=$(rg -H -n '\[ \]' ~/Dropbox/vimwiki  | fzf  | awk -F: '{print "+"$2" "$1}' )
+
+	if [[ ! -z $content ]];then
+		vim $content
+	else
+		break
+	fi
+done
