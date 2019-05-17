@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #cat ~/.bash_eternal_history  | fzf | gcut -c1-49 --complement
+# requires rpbcopy
 
 
 option="/bin/cat" # default option, doing nothing
@@ -39,6 +40,6 @@ echo $res
 
 
 if [[ $nofzf == 0 ]]; then
-	echo "$res" | tr -d '\n' | pbcopy
+	echo "$res" | tr -d '\n' | rpbcopy
 fi
 
