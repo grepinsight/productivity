@@ -1,4 +1,5 @@
 #!/bin/bash
 
 
+todoist sync
 todoist list | grep Inbox
