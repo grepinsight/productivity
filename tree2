@@ -1,0 +1,5 @@
+#!/bin/bash
+RESOLVED_PATH=$(fd --no-ignore $1)
+shift 1
+tree "$@" $RESOLVED_PATH
+
