@@ -1,4 +1,4 @@
 #!/bin/bash
 
 #todoist sync && todoist list | egrep -v "recurring|NiceToHave|Insighty-Life|Home|morning_routine|family|Entertainment|medical" | sort -k3,3 | todoist-time-left.py
-todoist sync && todoist list | egrep '#Counsyl' | sort -k3,3 # | todoist-time-left.py
+todoist sync && todoist list | egrep '#Counsyl-Current' | sort -k3,3 # | todoist-time-left.py
