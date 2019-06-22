@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rg -t py -g '!miniconda3' "$1" ~/prj
