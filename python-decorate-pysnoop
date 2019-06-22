@@ -1,0 +1,4 @@
+#!/bin/bash
+
+perl -p -e 's/(\s*)(def\s*(\w+)\s*\(.*?(\):)?\s*)/\@pysnooper.snoop("pysnoop--\3.log")\n\2/g'
+
