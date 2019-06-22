@@ -1,0 +1,12 @@
+#!/bin/bash
+
+git rebase -i origin/master 2> /dev/null
+
+if [[ $? != 0 ]]; then
+	num_commits=$(git log --oneline | wc -l)
+	num_commits=$((num_commits - 1))
+
+	git rebase -i HEAD~$num_commits
+fi
+
+
