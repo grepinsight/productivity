@@ -1,0 +1,14 @@
+#!/bin/bash
+
+KEYWORD="$1"
+
+if [[ $KEYWORD == *"::"* ]]; then
+	echo "package ::"
+	package=${KEYWORD%%::*}
+	keyword=${KEYWORD##*::}
+
+	Rscript -e "help(\"$keyword\", package=\"$package\")"
+else
+	Rscript -e "help(\"$KEYWORD\")"
+fi
+
