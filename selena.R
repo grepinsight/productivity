@@ -8,6 +8,22 @@ library(rvest)
 library(tidyverse)
 library(stringr)
 
+docker_start <- function() {
+  prev_docker_container <- system("docker ps | grep selenium/standalone-chrome:3.11.0 | awk '{print $1}'", intern=TRUE)
+
+  if(prev_docker_container != "") {
+    flog.info("Stopping the previous container: {prev_docker_container}")
+    system(glue::glue("docker stop {prev_docker_container}"))
+  }
+  flog.info("Starting  Docker")
+  DOCKER_ID <- system("docker run -d -p 4446:4444 selenium/standalone-chrome:3.11.0", intern=TRUE)
+  return(DOCKER_ID)
+}
+docker_stop <- function(DOCKER_ID) {
+  flog.info("Stopping Docker")
+  system(glue::glue("docker stop {DOCKER_ID}"))
+}
+
 get_remdr <- function(url=NULL, round_trip=FALSE) {
   remDr <- remoteDriver(remoteServerAddr = "localhost", port = 4446L, browserName = "chrome")
   remDr$open()
