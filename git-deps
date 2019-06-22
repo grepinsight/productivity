@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git status -s | \
+  awk '{print $2}' | \
+  xargs -i echo "echo -e '\n\n----------{}------------' && rg \$(basename {}) ." | \
+  bash
