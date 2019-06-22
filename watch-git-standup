@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd $HOME
+watch --interval 600 -d --color 'git standup -s -m 2'
