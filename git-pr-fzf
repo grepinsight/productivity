@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+PR_NUMBER=$(hub pr list | fzf | awk '{print $1}' | tr -d '#')
+
+hub pr show $PR_NUMBER
