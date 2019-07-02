@@ -1,4 +1,27 @@
 #!/bin/bash
 
-perl -p -e 's/(\s*)(def\s*(\w+)\s*\(.*?(\):)?\s*)/\@pysnooper.snoop("pysnoop--\3.log")\n\2/g'
 
+
+PYSNOOPER=$(mktemp)
+
+cat << "EOF" > $PYSNOOPER
+import pysnooper
+
+import pysnooper.utils
+from cheap_repr import cheap_repr
+
+def my_repr(x, custom_repr=None):
+    result = cheap_repr(x)
+    if '\n' in result:
+        result = '\n' + result
+    return result
+
+pysnooper.utils.get_shortish_repr = my_repr
+EOF
+
+
+cat $PYSNOOPER $1 > $1.temp
+
+perl -pi -e 's/(\s*)(def\b\s*(\w+)\s*\(.*?(\):)?\s*)/\1\@pysnooper.snoop("pysnoop--\3.log")\n\1\2/g' $1.temp
+
+mv $1.temp $1
