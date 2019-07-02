@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+if [[ -z $GIT_COMMIT_SEARCH_PATH ]]; then
+	echo "\$GIT_COMMIT_SEARCH_PATH is empy" >&2
+	exit 0
+fi
+REPO_TO_SEARCH=$(echo $GIT_COMMIT_SEARCH_PATH | tr ':' '\n' | fzf)
+
+if cd $REPO_TO_SEARCH; then
+	git --no-pager log --oneline --decorate | awk -v cwd=$(basename $PWD) '{print "("cwd") "$0}'  | fzf | awk '{print $2}'
+fi
+
