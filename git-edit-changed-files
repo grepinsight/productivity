@@ -1,0 +1,4 @@
+#!/bin/bash
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+vim $(git log --name-only --oneline origin/$BRANCH_NAME..$BRANCH_NAME | awk 'NR % 2 == 0' | sort |uniq)
