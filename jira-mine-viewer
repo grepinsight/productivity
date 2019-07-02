@@ -1,4 +1,7 @@
 #!/bin/bash
 # Preview jira tickets contents
+JIRA_ISSUE=$(jira mine2 | fzf --preview "jira view \$(echo {} | cut -f1 -d:)" | cut -f1 -d:)
 
-jira mine2 | fzf --preview "jira view \$(echo {} | cut -f1 -d:)"
+if [[ ! -z $JIRA_ISSUE ]]; then
+	jira view $JIRA_ISSUE
+fi
