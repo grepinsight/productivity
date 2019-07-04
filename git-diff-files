@@ -1,0 +1,9 @@
+#!/bin/bash
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+REMOTE_PRESENT=$(git remote -v)
+
+if [[ ! -z $REMOTE_PRESENT ]]; then
+	git icdiff2 origin/$BRANCH_NAME..$BRANCH_NAME
+fi
