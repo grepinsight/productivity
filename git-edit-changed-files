@@ -1,4 +1,8 @@
 #!/bin/bash
 
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
-vim $(git log --name-only --oneline origin/$BRANCH_NAME..$BRANCH_NAME | awk 'NR % 2 == 0' | sort |uniq)
+vim $(git log --name-only --oneline origin/$BRANCH_NAME..$BRANCH_NAME | \
+	# one big hack to get just file names
+	quotify | xargs file | grep -v "cannot open"| cut -f1 -d: | \
+	sort | \
+	uniq)
