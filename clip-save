@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eux
+NUM_SCREEN_SHOTS="$(fd "Screen Shot.*png" "$HOME/Desktop" | wc -l | strip.pl)"
+
+if [[ $NUM_SCREEN_SHOTS == 1 ]]; then
+	screenshot="$(fd "Screen Shot.*png" "$HOME/Desktop" )"
+	echo "screenshot: $screenshot"
+	read -p -r "What do you want me to save as? (${yn:-unnamed.png}): " yn
+	mv "$screenshot" ~/Dropbox/vimwiki/assets/"${yn:-unnamed.png}"
+fi
