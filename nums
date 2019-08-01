@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -eux
+TERMS_FILES=$(sed -e "s@\$HOME@""$HOME"'@' "$HOME"/.numbers_list | tr '\n' ' ')
+
+
+if [[ -z $TERMS_FILES ]]; then
+	exit 0
+fi
+
+content=$(rg -H --column -n . $TERMS_FILES | fzf --preview-window up --preview 'preview-viewer {} {} {}'| awk -F: '{print "+"$2" "$1}')
+
+if [[ -n $content ]]; then
+	vim ${content}
+fi
