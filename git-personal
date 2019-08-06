@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -eux
+
+git config --local user.email "grepinsight@gmail.com"
+git config --local user.name  "Albert Lee"
+git config --local hub.host "https://github.com"
+git config --local github.user "grepinsight"
