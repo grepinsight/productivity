@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ "$2" != "--no-fx" ]]; then
+	tmux split-window -v -c "#{pane_current_path}" "cat ${1} | fx"
+fi
+
+mycontent=$(echo '' | \
+	fzf --print-query --preview-window "top:95%" --preview "cat ${1} | jq '{q}' | cat" | \
+	tr -d '\' | \
+    sed 's/\$/\\$/g' | \
+    sed 's/"/\\"/g' | \
+	awk -v myfile=$1 '{print "cat "myfile " | jq -r \""$0"\""}')
+
+
+echo $mycontent
+echo $mycontent | perl -pe 'chomp' | pbcopy
+
+
+
