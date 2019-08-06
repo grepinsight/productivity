@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+if cd $HOME; then
+	git standup -s -m 2
+fi
