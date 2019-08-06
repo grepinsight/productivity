@@ -1,0 +1,5 @@
+#!/bin/bash
+
+java -jar ~/src/cromwell/womtool-36.jar graph ${1} | dot -Tpng > ${1%%.wdl}.png && open ${1%%.wdl}.png
+
+
