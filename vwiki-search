@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+VIMWIKI_PATH="$HOME/Dropbox/vimwiki"
+set -eux
+
+content=$( rg -g '!*.html' -H --column -n . "$VIMWIKI_PATH" | fzf --preview 'preview-viewer {} {} {}' | awk -F: '{print "+"$2" "$1}')
+
+if [[ -n $content ]]; then
+	vim ${content}
+fi
+
