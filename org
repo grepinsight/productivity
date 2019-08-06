@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+set -eux
+
+if [[ -e $HOME/Desktop ]]; then
+	ls $HOME/Desktop
+fi
+
+if [[ -e $HOME/Downloads ]]; then
+	ls $HOME/Downloads
+fi
