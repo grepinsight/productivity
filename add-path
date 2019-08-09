@@ -1,4 +1,4 @@
 #!/bin/bash
 
 set -eux
-echo "export PATH=\$PATH:$PWD" >> $HOME/.dotfiles/bash/local/bash_settings_localk
+echo "export PATH=\$PATH:$PWD" >> $HOME/.dotfiles/bash/local/bash_paths_local
