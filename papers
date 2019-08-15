@@ -1,8 +1,8 @@
 #!/bin/bash
 
-paper="$(fd ".pdf$" ~/Dropbox/vimwiki/Papers/ \
+paper="$(fd ".pdf$" ~/Dropbox/Papers/ \
     | fzf -e \
-     --preview-window up:90% \
+     --preview-window up:60% \
 	 --preview "pdftotext -f 1 -l 3 '{1}' - ")"
 
 if [[ -n "$paper" ]]; then

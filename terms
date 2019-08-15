@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -eux
-TERMS_FILES=$(sed -e "s@\$HOME@""$HOME"'@' "$HOME"/.terms_list | tr '\n' ' ')
+TERMS_FILES=$(sed -e "s@\$HOME@""$HOME"'@' $HOME/.terms_list | tr '\n' ' ')
 
 
 content=$(rg -H --column -n . $TERMS_FILES | fzf --preview-window up --preview 'preview-viewer {} {} {}'| awk -F: '{print "+"$2" "$1}')
