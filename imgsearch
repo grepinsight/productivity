@@ -1,6 +1,6 @@
 #!/bin/bash
 
-img="$(find ${HOME}/Dropbox/vimwiki/assets -type f | strip_color | fzf --preview 'termpix {} --width 80 --height 50')"
+img="$(fd --no-ignore '\.(png|jpeg|jpg)$' ${HOME}/Dropbox/vimwiki | strip_color | fzf --preview 'termpix {} --width 80 --height 50')"
 
 if [[ -e "$img" ]]; then
 	open "$img"
