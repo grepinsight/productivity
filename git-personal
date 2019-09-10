@@ -6,3 +6,9 @@ git config --local user.email "grepinsight@gmail.com"
 git config --local user.name  "Albert Lee"
 git config --local hub.host "https://github.com"
 git config --local github.user "grepinsight"
+
+
+if [[ -n $GITHUB_PERSONAL_INFO_PATH ]]; then
+	touch .envrc
+	cat $GITHUB_PERSONAL_INFO_PATH >> .envrc
+fi

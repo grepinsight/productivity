@@ -1,6 +1,6 @@
 #!/bin/bash
 
-paper="$(fd ".pdf$" ~/Dropbox/Papers/ \
+paper="$(fd ".pdf$" ~/Dropbox/04_papers/ \
     | fzf -e \
      --preview-window up:60% \
 	 --preview "pdftotext -f 1 -l 3 '{1}' - ")"
