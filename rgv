@@ -3,5 +3,5 @@
 content=$(rg -H -n . | fzf  | awk -F: '{print "+"$2" "$1}')
 
 if [[ ! -z $content ]];then
-	vim $content
+	vim -c "normal zRzz" ${content}
 fi
