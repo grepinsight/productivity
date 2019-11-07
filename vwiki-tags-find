@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+TAGS="$(vimwiki-tags | fzf | awk '{print $2}')"
+
+if [[ -z $TAGS ]]; then
+	exit 1
+fi
+content=$(rg -H -n $TAGS $HOME/Dropbox/vimwiki | fzf --preview-window up --preview 'preview-viewer {} {} {}'  | awk -F: '{print "+"$2" "$1}')
+
+if [[ ! -z $content ]];then
+	vim -c "normal zRzz" $content
+fi

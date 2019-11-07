@@ -1,0 +1,9 @@
+#!/bin/bash
+
+git_diff_str=$(git log -n 2 --oneline -- "$1" | \
+	awk '{print $1}' | \
+	tac | \
+	paste -d" " - - | \
+	sed 's/ /../')
+
+git icdiff $git_diff_str | less -R
