@@ -1,5 +1,0 @@
-#!/bin/bash
-
-
-rg $(vimwiki-tags | fzf | awk '{print $2}')
-

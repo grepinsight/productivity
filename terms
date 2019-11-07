@@ -7,5 +7,5 @@ TERMS_FILES=$(sed -e "s@\$HOME@""$HOME"'@' $HOME/.terms_list | tr '\n' ' ')
 content=$(rg -H --column -n . $TERMS_FILES | fzf --preview-window up --preview 'preview-viewer {} {} {}'| awk -F: '{print "+"$2" "$1}')
 
 if [[ -n $content ]]; then
-	vim ${content}
+	vim -c "normal zRzz" ${content}
 fi
