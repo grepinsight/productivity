@@ -1,8 +1,9 @@
 #!/bin/bash
 
 
-toggl current | \
+
+/Users/allee/go/bin/toggl current | \
 	egrep 'Description|Duration' | \
 	cut --complement -c1-12 | \
 	paste - - | \
-	perl -pe 's/\t(.*)/ (\1)/'
+	perl -pe 's/\t(.*)/ (\1)/; s/\s*$//'
