@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "Today"
+fd --changed-within 8h
+echo
+
+echo "Worked on yesterday"
+fd --changed-within 1day --changed-before 8h
+echo
+
+
+echo "2 days ago..."
+fd --changed-within 2days --changed-before 1day
+echo
+
+echo "3 days ago"
+fd --changed-within 3days --changed-before 2day
+echo
+
+echo "4 days ago"
+fd --changed-within 4days --changed-before 3day
+echo

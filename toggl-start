@@ -1,4 +1,16 @@
 #!/bin/bash
 
+if [[ -n "$1" ]]; then
+	# if args are given
+	toggl start --project-id $(toggl projects | fzf | cut -f1 -d ' ') "$@"
+else
+	read -p "What are you working on? -> " content
+	echo "$content"
+	PROJECT_ID=$(toggl projects | fzf | cut -f1 -d ' ')
 
-toggl start --project-id $(toggl projects | fzf | cut -f1 -d ' ') "$@"
+	if [[ -n $PROJECT_ID ]]; then
+		toggl start --project-id ${PROJECT_ID} "$content"
+		echo "toggl timer started!"
+	fi
+
+fi
