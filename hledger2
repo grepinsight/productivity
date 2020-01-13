@@ -1,0 +1,31 @@
+#!/bin/bash
+
+CURRENT_MONTH=$(date "+%Y-%m")
+JOURNAL_PATH=${HLEDGER_JOURNAL_PATH:-.hledger.journal}
+
+HLEDGER="hledger -f $JOURNAL_PATH"
+
+TIMEFRAME="-b ${CURRENT_MONTH}"
+
+while true; do
+    case "$1" in
+        -t) TIMEFRAME="$2";shift 2 ;;
+        *) break;;
+    esac
+done
+
+while true; do
+    ITEM=$($HLEDGER bal exp $TIMEFRAME -O csv | \
+        csvsort -c balance | \
+        grep -v total | csvlook |
+        fzf --tac --bind ctrl-d:page-down,ctrl-u:page-up,ctrl-j:down,ctrl-k:up |  \
+        tr -d ' ' | \
+        cut -f2 -d '|')
+
+    if [[ $? == 0 && -n $ITEM ]]; then
+        $HLEDGER reg $TIMEFRAME $ITEM | less -S
+    else
+        break
+    fi
+
+done
