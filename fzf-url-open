@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cat ~/.bash_eternal_history  | \
+egrep -o 'https://[^ *^\[]+' | \
+sort | \
+uniq | \
+fzf
+
