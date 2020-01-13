@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo "Scripts"
+echo "======="
+fd -e r -e Rmd -e sh -e py | xargs -I{} git_status_improved {}
+echo ""
+
+echo "Data"
+echo "===="
+fd -e csv --no-ignore -e tsv -e txt | xargs -I{} git_status_improved {}
+echo ""
+
+echo "Figures"
+echo "======="
+fd -e png -e jpeg -e jpg  | xargs -I{} git_status_improved {}
+echo ""
+
+echo "Docs"
+echo "==="
+fd -e md -e rst | xargs -I{} git_status_improved {}
+echo ""
+
+echo "Docs (html)"
+echo "============"
+fd -e html | xargs -I{} git_status_improved {}
+echo ""
+
+echo "Productivity scripts"
+echo "======="
+ls Makefile | xargs -I{} git_status_improved {}
+echo ""
