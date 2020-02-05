@@ -1,3 +1,4 @@
 #!/bin/bash
 
-pyenv versions | awk '$1 ~ /\*/' | perl -ne '/(\d\.\d+\.\d+)/;print $1'
+#pyenv versions | awk '$1 ~ /\*/' | perl -ne '/(\d\.\d+\.\d+)/;print $1'
+pyenv versions | awk '$1 ~ /\*/' | perl -ne '/(\d+\.\d+(\.\d+|-dev))/;print $1'
