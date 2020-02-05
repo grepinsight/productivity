@@ -1,22 +1,33 @@
 #!/bin/bash
 
+CMD="fd"
+
 echo "Today"
-fd --changed-within 8h
+$CMD --changed-within 8h
 echo
 
 echo "Worked on yesterday"
-fd --changed-within 1day --changed-before 8h
+$CMD --changed-within 1day --changed-before 8h
 echo
 
 
 echo "2 days ago..."
-fd --changed-within 2days --changed-before 1day
+$CMD --changed-within 2days --changed-before 1day
 echo
 
 echo "3 days ago"
-fd --changed-within 3days --changed-before 2day
+$CMD --changed-within 3days --changed-before 2day
 echo
 
 echo "4 days ago"
-fd --changed-within 4days --changed-before 3day
+$CMD --changed-within 4days --changed-before 3day
+echo
+
+
+echo "5 days ago"
+$CMD --changed-within 5days --changed-before 4day
+echo
+
+echo "6 days ago"
+$CMD --changed-within 6days --changed-before 5day
 echo

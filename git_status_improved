@@ -1,0 +1,21 @@
+#!/bin/bash
+
+git_status_improved__() {
+	local filename="$1"
+
+	gitstatus_result="$(git status -s --ignored $filename)"
+
+	if [[ -z "$gitstatus_result" ]]; then
+		git_tracked_files=$(git ls-files | grep $filename)
+		if [[ -z "$git_tracked_files" ]]; then
+			echo "?? $filename"
+		else
+			echo "[Good] $filename"
+		fi
+	else
+		echo "$gitstatus_result"
+	fi
+
+}
+
+git_status_improved__ "$@"

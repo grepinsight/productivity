@@ -1,0 +1,3 @@
+#!/bin/bash
+
+Rscript -e "setwd(Sys.getenv('PWD')); devtools::load_all(); testthat::test_file(\"$1\")"

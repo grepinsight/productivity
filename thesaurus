@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo '' | \
+fzf --print-query --preview-window "top:95%" --preview "wn {q} -synsa | fold -w 91"
+
+
