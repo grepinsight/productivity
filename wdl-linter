@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ miniwdl check $1 2>&1 | \
+	 egrep '\bLn ' | \
+	 strip.pl | \
+    perl -ne 'm/Ln (\d+),? Col (\d+)\)(.*)/; print $1.":".$2.":".$3."\n" ' |
+	awk -v fn=$1 '{print fn":"$0}'
