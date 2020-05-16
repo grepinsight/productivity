@@ -1,6 +1,12 @@
 #!/bin/bash
 
+
 set -eux
+
+if [[ ! -d $PWD/.git ]]; then
+    echo ".git not present. Intializing with git init"
+    git init
+fi
 
 git config --local user.email "grepinsight@gmail.com"
 git config --local user.name  "Albert Lee"
