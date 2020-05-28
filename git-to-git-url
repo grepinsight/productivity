@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -ux
+
+
+URL=$(git remote get-url origin)
+
+
+if [[ $URL == *git@* ]]; then
+    echo "Already git Url "
+    exit 0
+fi
+
+if [[ $URL == *https:* ]]; then
+    URL="${URL/https:\/\//git@}"
+    URL="${URL/\//:/}"
+
+    git remote set-url origin $URL
+    exit 0
+fi
+
+
+
+
+
