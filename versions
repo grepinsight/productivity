@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+
+echo "Platform: $(uname -a)"
+echo "Rstudio: $(cat /Applications/RStudio.app/Contents/Resources/VERSION)"
+echo "R: $(R --version | head -1)"
