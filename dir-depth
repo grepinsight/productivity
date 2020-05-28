@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+fd --no-ignore | \
+    egrep -v "(renv|experiments_wdl|_cache|_files)/" | \
+    perl -lane '$n = () = $_ =~ m|/|gi; print $_ ."\t". ($n + 1)' | \
+    sort -k2,2nr -t '	'
+
