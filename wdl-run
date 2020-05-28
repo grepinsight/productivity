@@ -1,3 +1,8 @@
 #!/bin/bash
 
-java -jar ~/src/cromwell/cromwell-36.jar run "$@"
+#java -jar ~/src/cromwell/cromwell-36.jar run "$@"
+
+miniwdl run --verbose \
+    -d experiments_wdl \
+    --copy-input-files \
+    "$@"
