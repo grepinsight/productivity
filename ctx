@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo -n "user: "
+echo $USER
+
+echo -n "pwd: "
+echo $PWD
+
+echo -n "datetime: "
+gdate -Imin
