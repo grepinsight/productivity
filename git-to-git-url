@@ -15,7 +15,7 @@ if [[ $URL == *https:* ]]; then
     URL="${URL/https:\/\//git@}"
     URL="${URL/\//:/}"
 
-    git remote set-url origin $URL
+    git remote set-url origin "$URL"
     exit 0
 fi
 
