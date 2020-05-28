@@ -1,0 +1,4 @@
+#!/bin/bash
+
+set -eux
+pandoc -o "${1%%.md}".org "$1"
