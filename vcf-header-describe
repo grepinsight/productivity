@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+tabix -H "$1"  | \
+  fzf | \
+  perl -ne '/ID=(.*?),.*Description="(.*?)"/; print $1.": "."$2\n"'

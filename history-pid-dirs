@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+awk -v pid="$1" '$1 == pid' < ~/.bash_eternal_history | \
+    cut -d @ -f2 | \
+    cut -f 1 -d '|' | \
+    uniq | \
+    sort | \
+    uniq | \
+    strip.pl

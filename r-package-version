@@ -1,0 +1,4 @@
+#!/bin/bash
+
+Rscript -e "packageVersion(\"$1\")"
+
