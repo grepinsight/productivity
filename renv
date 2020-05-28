@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+Rscript -e 'renv::init()'
