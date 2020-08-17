@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eux
+alias_loc=$(rg -H --column -n --no-ignore "." "$HOME/.dotfiles" | \
+			fzf --preview-window up --preview 'preview-viewer {} {} {}'| \
+			awk -F: '{print "+"$2" "$1}')
+if [[ -n "$alias_loc" ]]; then
+	$EDITOR $alias_loc
+fi
