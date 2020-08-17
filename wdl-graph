@@ -1,5 +1,5 @@
 #!/bin/bash
 
-java -jar ~/src/cromwell/womtool-36.jar graph ${1} | tee ${1%%.wdl}.dot | dot -Tpng > ${1%%.wdl}.png && open ${1%%.wdl}.png
+java -jar ~/src/cromwell/womtool-48.jar graph ${1} | tee ${1%%.wdl}.dot | dot -Tpng > ${1%%.wdl}.png && open ${1%%.wdl}.png
 
 

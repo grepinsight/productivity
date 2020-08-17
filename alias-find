@@ -5,5 +5,5 @@ alias_loc=$(rg -H --column -n --no-ignore "alias ${1:-.}" "$HOME/.dotfiles" | \
 			fzf --preview-window up --preview 'preview-viewer {} {} {}'| \
 			awk -F: '{print "+"$2" "$1}')
 if [[ -n "$alias_loc" ]]; then
-	vim $alias_loc
+	$EDITOR $alias_loc
 fi
