@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# set -eux
+
+
+my_readlink() {
+    local my_file="$1"
+    if readlink -m ${my_file} &> /dev/null; then
+        my_file=$(readlink -m ${my_file})
+    elif greadlink -m ${my_file} &> /dev/null; then
+        my_file=$(greadlink -m ${my_file})
+    else
+        >&2 echo "greadlink error"
+        exit 1
+    fi
+    echo "$my_file"
+}
+
+check_protect_dir() {
+    local my_dir="$1"
+    for d in ${PROTECTED_DIR[@]}; do
+        if [[ "$d" ==  "$my_dir" ]]; then
+            echo "Cannot shreddir ${d}"
+            exit 1
+        fi
+    done
+}
+
+DIRNAME="$1"
+
+PROTECTED_DIR=($HOME $HOME/prj $HOME/src)
+
+if [[ -z "$DIRNAME" ]]; then
+    >&2 echo "Usage: shreddir <DIRNAME>"
+    exit 1
+fi
+
+if [[ ! -d "$DIRNAME" ]]; then
+    >&2 echo "${DIRNAME} is not a valid directory! Aborting ..."
+    exit 1
+fi
+
+DIRNAME=$(my_readlink "$DIRNAME")
+
+echo "Are you sure you want to shred ${DIRNAME}? [y/N]"
+read response
+
+
+if [[ "$response" == "y" || "$response" == "Y" ]]; then
+
+    check_protect_dir $DIRNAME
+
+    >&2 echo "shreding files"
+    find "${DIRNAME}" -type f -exec shred -u -v {} \;
+    rm -rf ${DIRNAME}
+
+else
+    >&2 echo "Aborting"
+fi
+
+
