@@ -6,9 +6,9 @@
 my_readlink() {
     local my_file="$1"
     if readlink -m ${my_file} &> /dev/null; then
-        my_file=$(readlink -m ${my_file})
+        my_file="$(readlink -m ${my_file})"
     elif greadlink -m ${my_file} &> /dev/null; then
-        my_file=$(greadlink -m ${my_file})
+        my_file=$(greadlink -m "${my_file}")
     else
         >&2 echo "greadlink error"
         exit 1
@@ -40,7 +40,7 @@ if [[ ! -d "$DIRNAME" ]]; then
     exit 1
 fi
 
-DIRNAME=$(my_readlink "$DIRNAME")
+DIRNAME="$(my_readlink "$DIRNAME")"
 
 echo "Are you sure you want to shred ${DIRNAME}? [y/N]"
 read response
