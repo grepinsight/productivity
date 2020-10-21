@@ -3,7 +3,6 @@
 #cat ~/.bash_eternal_history  | fzf | gcut -c1-49 --complement
 # requires rpbcopy
 
-
 option="/bin/cat" # default option, doing nothing
 TODAY=$(date "+%Y-%m-%d")
 
@@ -34,11 +33,21 @@ postprocess() {
 	fzf
 }
 
+if [ -z $ETERNAL_HISTORY_FILE ]; then
+    if [ -n $ZSH_VERSION ]; then
+        ETERNAL_HISTORY_FILE="~/.zsh_eternal_history"
+    else
+        # assume it's bash
+        ETERNAL_HISTORY_FILE="~/.bash_eternal_history"
+    fi
+fi
+
+
 if [[ $nofzf == 1 ]]; then
-	search_result="cat ~/.bash_eternal_history  | $option"
+	search_result="cat $ETERNAL_HISTORY_FILE  | $option"
 	res=$(eval $search_result)
 else
-	search_result="cat ~/.bash_eternal_history  | $option | postprocess"
+	search_result="cat $ETERNAL_HISTORY_FILE  | $option | postprocess"
 	res=$(eval $search_result)
 fi
 echo $res
