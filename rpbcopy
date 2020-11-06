@@ -3,7 +3,14 @@
 [ -n "$SSH_CLIENT" ] && SESSION_TYPE="remote"
 
 if [[ $SESSION_TYPE == "remote" ]]; then
-	cat | nc -q0 localhost 2224
+
+    if nc --version > /dev/null 2>&1; then
+        cat | nc localhost 2224
+    else
+        echo "DDD"
+        cat | nc -q0 localhost 2224
+    fi
+
 else
 	cat | pbcopy
 fi
