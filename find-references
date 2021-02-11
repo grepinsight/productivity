@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+
+echo "Finding for: $@"
+echo "---------------"
+
+fd "$@"
+rg -g "*ipynb" \
+    -g "*.py" \
+    -g "*.R" \
+    -g "*.Rmd" \
+    -g "*.sh" \
+    -g "*.txt" \
+    -g "Makefile" \
+    -g "Snakefile" \
+    -g "Jenkinsfile" \
+    "$@"
+
+
