@@ -1,5 +1,4 @@
 #!/bin/bash
 # Open the repository in a browser
 
-
-open $(git remote -v | grep origin | grep fetch | awk '{print $2}' | cut -f2- -d@ | tr ':' '/' | sed 's/\.git$//')
+gh repo view --web
