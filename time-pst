@@ -2,5 +2,7 @@
 
 PST="sf:$(TZ=':America/Los_Angeles' date '+%l:%M %p (%a)')"
 KOR="kr:$(TZ=':Asia/Seoul' date '+%l:%M %p (%a)')"
+UTC="utc:$(TZ='UTC' date '+%l:%M %p (%a)')"
 
-echo "$PST | $KOR"
+#echo "$PST | $KOR | $UTC"
+echo "$PST"

@@ -13,6 +13,9 @@ git config --local user.name  "Albert Lee"
 git config --local hub.host "https://github.com"
 git config --local github.user "grepinsight"
 
+GIT_PERSONAL="$(git config --local remote.origin.url | sed 's/github.com/github-personal.com/')"
+git config --local remote.origin.url $GIT_PERSONAL
+
 
 if [[ -n $GITHUB_PERSONAL_INFO_PATH ]]; then
 	touch .envrc

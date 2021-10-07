@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# take a list from stdin and make a python list literal
+awk 'BEGIN{print "["}{print "\""$1"\","}END{print "]"}'
