@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# HEIC to JPEG converter
+#
+# usage: heic-to-jpeg <heic-file>
+
+
+
+in_heic="$1"
+out_jpeg="$(basename ${in_heic})".jpeg
+sips -s format jpeg "${in_heic}" --out "${out_jpeg}"
