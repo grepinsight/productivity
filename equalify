@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# take a list from stdin and make item = item
+awk '{print $0" = "$0}'
