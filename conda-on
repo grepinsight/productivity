@@ -4,9 +4,13 @@
 set -x
 
 conda_env="$1"
+conda_binary="$2"
 
 if command -v conda > /dev/null; then
-    conda_binary="$(which conda)"
+
+    if [[ -z conda_binary ]]; then
+        conda_binary="$(which conda)"
+    fi
 
     cat << EOF > .envrc
 __conda_setup="\$('$conda_binary' 'shell.bash' 'hook' 2> /dev/null)"
