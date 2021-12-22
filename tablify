@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+
+strip.pl | tr -d ',' | tr -d '"' | awk '{print "|"$0"|\n""+---+"}'| cat <(echo -e "+-----+\n|description|\n+====+") -
+
+

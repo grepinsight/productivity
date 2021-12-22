@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+
+qstat | sed '1,2d' | awk '{print $8}' | sort | uniq -c

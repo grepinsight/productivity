@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+
+
+head -2 $@ | datamash transpose | tr '\t' ',' | csvlook
