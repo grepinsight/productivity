@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+cat $1 | \
+  body grep $2 | \
+  datamash transpose | \
+  column -t
+
+

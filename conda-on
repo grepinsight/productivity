@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# conda-on <name-of-env>
+
+set -x
+
+conda_env="$1"
+conda_binary="$2"
+
+if command -v conda > /dev/null; then
+
+    if [[ -z $conda_binary ]]; then
+        conda_binary="$(which conda)"
+    fi
+
+    cat << EOF > .envrc
+__conda_setup="\$('$conda_binary' 'shell.bash' 'hook' 2> /dev/null)"
+eval "\$__conda_setup"
+conda activate $conda_env
+EOF
+fi

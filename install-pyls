@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+
+set -x
+pip install 'python-language-server[all]'
+pip install pyls-mypy
+pip install pyls-black

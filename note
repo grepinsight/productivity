@@ -2,4 +2,7 @@
 # simple note taking app
 
 
+datetime="$(date --iso-8601=seconds )"
+echo "" >> notes
+echo '# '"$datetime" >> notes
 cat ~/.bash_eternal_history | tail -1 | perl -lane 'print join(" ", @F[6..$#F])' >> notes

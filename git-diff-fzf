@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+
+
+git_diff_string() {
+    git branch | \
+        tr -d '*' | \
+        awk '{print $1}' | \
+        fzf --multi=2
+}
+
+set -x
+_git_diff_result="$(git_diff_string)"
+
+num_result=$(wc -w <(echo ${_git_diff_result}) | awk '{print $1}')
+
+
+if [[ $num_result == 1 ]]; then
+    git diff HEAD..${_git_diff_result} "$@"
+
+elif [[ $num_result == 2 ]]; then
+    git diff $(echo $_git_diff_result | sed 's/ /../') "$@"
+fi

@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+
+import subprocess
+import defopt
+import pandas as pd
+from io import StringIO
+import xml.etree.ElementTree as ET
+from typing import List
+
+
+def _print_list(listlike: List):
+    for i in listlike:
+        print(i)
+
+
+def _parse_qstat(eqw: bool = False):
+    out = subprocess.run(
+        [
+            "qstat",
+        ],
+        capture_output=True,
+    )
+
+    jobs = out.stdout.decode("utf-8").split("\n")[2:]
+    jobs = "\n".join(jobs)
+
+    df = pd.read_fwf(
+        StringIO(jobs),
+        names=[
+            "qid",
+            "priority",
+            "job_name",
+            "user",
+            "job_status",
+            "date",
+            "host",
+            "node",
+        ],
+        index_col=False,
+    )
+
+    if eqw:
+        df = df.query("job_status == 'Eqw'")
+    return df
+
+
+def job_ids(*, eqw: bool = False):
+    df = _parse_qstat(eqw=eqw)
+    _print_list(df.qid)
+
+
+def job_names(*, qid: bool = False, eqw: bool = False):
+
+    df = _parse_qstat(eqw=eqw)
+    job_names = [_get_job_name(i) for i in df.qid.tolist()]
+
+    _print_list(job_names)
+
+
+def _get_job_name(qid: str):
+
+    out = subprocess.run(
+        [
+            "qstat",
+            "-j",
+            str(qid),
+            "-xml",
+        ],
+        capture_output=True,
+    )
+
+    raw_xml_str = out.stdout.decode("utf-8")
+
+    tree = ET.parse(StringIO(raw_xml_str))
+    job_name = tree.findall(".//JB_job_name")[0].text
+    return job_name
+
+
+if __name__ == "__main__":
+    defopt.run([job_names, job_ids])

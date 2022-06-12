@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rg -g '!data' --no-ignore "$1"
+rg --hidden -g '!data' --no-ignore "$1"
 
 

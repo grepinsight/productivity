@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+git show-ref --heads | \
+    grep --file=<(git show-ref --heads | \
+                    awk '{print $1}' | \
+                    parallel "git grep \"$1\" {}" | \
+                    cut -f1 -d:)
+

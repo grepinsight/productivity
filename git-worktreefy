@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+
+branch="$1"
+base="$2"
+set -x
+git worktree \
+  add -b \
+  $branch \
+  $branch \
+  $base

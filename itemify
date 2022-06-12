@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+
+perl -ne 's/^(\s+)/$1- /; print($_)'
