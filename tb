@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cat "$@" | xsv table -d"\t" | less -S -R

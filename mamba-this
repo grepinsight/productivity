@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# check if mamba is present
+command -v mamba    2> /dev/null >&2 || ( >&2 echo "executable 'mamba' doesn't exist" && exit 0 )
+command -v conda-on 2> /dev/null >&2 || ( >&2 echo "executable 'conda-on' doesn't exist" && exit 0 )
+
+if [[ -z $PWD ]]; then
+    >&2 echo "\$PWD variable is not set"
+fi
+current_dir_name="$(basename $PWD)"
+set -x
+conda_env="$(readlink -m $(which mamba))"
+conda_bindir="$(dirname $conda_env)"
+conda_dir="$(dirname $conda_bindir)"
+conda-on ${current_dir_name} ${conda_bindir}/conda
+
+# /ghess/screening/contributors/allee/envs/miniconda3/envs
+
+if [[ ! -d $conda_dir/envs/${current_dir_name} ]]; then
+    mamba create -n $current_dir_name
+else
+    >&2 echo "conda environment called $current_dir_name already exists at $conda_dir/envs/${current_dir_name}"
+fi
+
+
+mamba env export -n $current_dir_name > env.yaml

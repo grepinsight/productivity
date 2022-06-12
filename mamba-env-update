@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -x
+env_yaml="${1:-env.yaml}"
+conda_env="$(basename $CONDA_PREFIX)"
+mamba env export -n $conda_env > $env_yaml
