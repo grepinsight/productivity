@@ -8,7 +8,7 @@ conda_binary="$2"
 
 if command -v conda > /dev/null; then
 
-    if [[ -z conda_binary ]]; then
+    if [[ -z $conda_binary ]]; then
         conda_binary="$(which conda)"
     fi
 
