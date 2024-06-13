@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+set -eux
+
+# Function to display help
+show_help() {
+    echo "Usage: $0 -r <repository-url> -b <branch-name> -d <directory-name> -p <path1> [-p <path2> ...]"
+    echo "  -r  Repository URL"
+    echo "  -b  Branch name"
+    echo "  -d  Directory name for sparse checkout"
+    echo "  -p  Paths to include in sparse checkout (at least one path is required)"
+    echo "  -h  Show this help message"
+}
+
+# Parse command line arguments
+REPOSITORY_URL=""
+BRANCH_NAME=""
+DIRECTORY_NAME=""
+SPARSE_PATHS=()
+
+while getopts ":r:b:d:p:h" opt; do
+    case ${opt} in
+        r )
+            REPOSITORY_URL=$OPTARG
+            ;;
+        b )
+            BRANCH_NAME=$OPTARG
+            ;;
+        d )
+            DIRECTORY_NAME=$OPTARG
+            ;;
+        p )
+            SPARSE_PATHS+=("$OPTARG")
+            ;;
+        h )
+            show_help
+            exit 0
+            ;;
+        \? )
+            echo "Invalid option: $OPTARG" 1>&2
+            show_help
+            exit 1
+            ;;
+        : )
+            echo "Invalid option: $OPTARG requires an argument" 1>&2
+            show_help
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND -1))
+
+# Check if mandatory parameters are provided
+if [ -z "$REPOSITORY_URL" ] || [ -z "$BRANCH_NAME" ] || [ -z "$DIRECTORY_NAME" ] || [ ${#SPARSE_PATHS[@]} -eq 0 ]; then
+    echo "Error: Missing required arguments"
+    show_help
+    exit 1
+fi
+
+# Clone the repository with sparse-checkout and filtering enabled
+git clone --filter=blob:none --no-checkout "$REPOSITORY_URL" "$DIRECTORY_NAME"
+cd "$DIRECTORY_NAME"
+
+# Enable sparse checkout
+git config core.sparseCheckout true
+
+# Write to .git/info/sparse-checkout
+for PATH in "${SPARSE_PATHS[@]}"; do
+    echo "$PATH" >> .git/info/sparse-checkout
+done
+
+# Checkout the specified branch
+export PATH=$PATH:$HOME/bin:/bin
+git checkout "$BRANCH_NAME"
