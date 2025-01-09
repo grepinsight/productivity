@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Function to display help message
+display_help() {
+  echo "Usage: daily [OPTION]"
+  echo "Opens the daily note file for today's date."
+  echo
+  echo "Options:"
+  echo "  -h, --help  Display this help message and exit"
+  echo
+  echo "The script requires the environment variable DAILY_DIR to be set."
+  echo "DAILY_DIR should point to the directory where daily note files are stored."
+}
+
+# Check if the DAILY_DIR environment variable is set
+if [[ -z "${DAILY_DIR}" ]]; then
+  echo "Error: DAILY_DIR environment variable is not set."
+  echo "Please set the DAILY_DIR environment variable to the directory where daily note files are stored."
+  exit 1
+fi
+
+# Check if the script was called with -h or --help option
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  display_help
+  exit 0
+fi
+
+# Get today's date in the format YYYY-MM-DD
+today=$(date +%Y-%m-%d)
+
+# File path with today's date
+file_path="${DAILY_DIR}/${today}.md"
+
+# Open the file with the default text editor
+$EDITOR "${file_path}"

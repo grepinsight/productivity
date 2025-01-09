@@ -1,0 +1,104 @@
+#!/bin/bash
+
+search_by_commit() {
+    git log --grep="$1" $2
+}
+
+search_by_content() {
+    git log -S "$1" $2
+}
+
+search_by_content_regex() {
+    git log -G "$1" $2
+}
+
+interactive_search() {
+    local options=("Search by commit message" "Search by content (string match)" "Search by content (regex)")
+    local choice=$(printf '%s\n' "${options[@]}" | fzf --prompt="Select search type: ")
+
+    case "$choice" in
+        "Search by commit message")
+            read -p "Enter commit message to search: " message
+            search_by_commit "$message" "$1"
+            ;;
+        "Search by content (string match)")
+            read -p "Enter content to search (string match): " content
+            search_by_content "$content" "$1"
+            ;;
+        "Search by content (regex)")
+            read -p "Enter content to search (regex): " regex
+            search_by_content_regex "$regex" "$1"
+            ;;
+    esac
+}
+
+display_help() {
+    echo "Usage: git-search [options]"
+    echo
+    echo "Options:"
+    echo "  -h, --help                 Display this help message"
+    echo "  -p, --patch                Show the actual content of the changes"
+    echo "  --by-commit <message>      Search by commit message"
+    echo "  --by-content <string>      Search by content using string match"
+    echo "  --by-content-regex <regex> Search by content using regex"
+    echo "  --since <date>             Search for commits since a specific date"
+    echo "  --until <date>             Search for commits until a specific date"
+    echo
+    echo "Examples:"
+    echo "  git-search                                 Start interactive search"
+    echo "  git-search -p                               Start interactive search and show content"
+    echo "  git-search --by-commit \"Fix bug\""
+    echo "  git-search --by-content \"function_name\" -p"
+    echo "  git-search --by-content-regex \"function_\w+\" -p"
+    echo "  git-search --since 2024-03-08"
+    echo "  git-search --since 2024-03-01 --until 2024-03-05"
+}
+
+patch_option=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            display_help
+            exit 0
+            ;;
+        -p|--patch)
+            patch_option="-p"
+            shift
+            ;;
+        --by-commit)
+            shift
+            search_by_commit "$1" "$patch_option"
+            exit 0
+            ;;
+        --by-content)
+            shift
+            search_by_content "$1" "$patch_option"
+            exit 0
+            ;;
+        --by-content-regex)
+            shift
+            search_by_content_regex "$1" "$patch_option"
+            exit 0
+            ;;
+        --since)
+            since="--since $2"
+            shift 2
+            ;;
+        --until)
+            until="--until $2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            display_help
+            exit 1
+            ;;
+    esac
+done
+
+if [[ -z "$since" && -z "$until" ]]; then
+    interactive_search "$patch_option"
+else
+    git log $since $until $patch_option
+fi

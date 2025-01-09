@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Define the path to your Obsidian vault and the vault name
+OBSIDIAN_VAULT_PATH="/Users/allee/Thoughts"
+OBSIDIAN_VAULT_NAME="thoughts"
+
+# Get the current working directory
+CURRENT_DIR=$(pwd)
+
+# Calculate the relative path from the vault path
+RELATIVE_PATH="${CURRENT_DIR#$OBSIDIAN_VAULT_PATH/}"
+
+# Determine the note name
+if [ -n "$1" ]; then
+    NOTE_NAME="$1"
+else
+    NOTE_NAME=$(basename "$CURRENT_DIR")
+fi
+
+# Remove any leading './' from the relative path
+RELATIVE_PATH="${RELATIVE_PATH#./}"
+
+# Check if the note name already ends with '.md'
+if [[ "$NOTE_NAME" != *.md ]]; then
+    NOTE_NAME="${NOTE_NAME}.md"
+fi
+
+# Construct the file path relative to the vault
+FILEPATH="$RELATIVE_PATH/$NOTE_NAME"
+
+# URL-encode the file path
+ENCODED_FILEPATH=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$FILEPATH'))")
+
+# Construct the Obsidian URI
+URL="obsidian://advanced-uri?vault=$OBSIDIAN_VAULT_NAME&filepath=$ENCODED_FILEPATH"
+
+# Open the note in Obsidian
+open "$URL"
