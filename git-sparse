@@ -70,5 +70,5 @@ for PATH in "${SPARSE_PATHS[@]}"; do
 done
 
 # Checkout the specified branch
-export PATH=$PATH:$HOME/bin:/bin
+export PATH=$PATH:$HOME/bin:/opt/homebrew/bin:/bin
 git checkout "$BRANCH_NAME"

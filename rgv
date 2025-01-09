@@ -1,7 +1,12 @@
 #!/bin/bash
 
-content=$(rg -g '!*.html' -H -n . | fzf  | awk -F: '{print "+"$2" "$1}')
+content=$(rg -g '!*.html' -H -n . | fzf $@ | awk -F: '{print "+"$2" "$1}')
 
+set -x
+echo $content
 if [[ ! -z $content ]];then
-	$EDITOR -c "normal zRzz" ${content}
+
+    file_path="$(echo $content| cut -f2- -d' ')"
+    line_number="$(echo $content| cut -f1 -d' ')"
+    eval "$EDITOR -c 'normal zRzz' ${line_number} $(printf '%q' "$file_path")"
 fi
