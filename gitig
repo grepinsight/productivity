@@ -1,3 +1,29 @@
 #!/bin/bash
 
+VERSION="1.0.0"
+
+show_help() {
+  echo "Usage: gitig [OPTION]... [PATTERN]"
+  echo "Append PATTERN to .gitignore."
+  echo
+  echo "Options:"
+  echo "  -h, --help      Show this help message and exit"
+  echo "  -v, --version   Show version information and exit"
+}
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  show_help
+  exit 0
+fi
+
+if [[ "$1" == "-v" || "$1" == "--version" ]]; then
+  echo "gitig version $VERSION"
+  exit 0
+fi
+
+if [[ -z "$1" ]]; then
+  show_help
+  exit 1
+fi
+
 echo "$1" >> .gitignore
