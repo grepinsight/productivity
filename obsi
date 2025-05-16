@@ -26,7 +26,10 @@ if [[ "$NOTE_NAME" != *.md ]]; then
 fi
 
 # Construct the file path relative to the vault
-FILEPATH="$RELATIVE_PATH/$NOTE_NAME"
+# FILEPATH="$RELATIVE_PATH/$NOTE_NAME"
+FILEPATH="$NOTE_NAME"
+echo $FILEPATH
+echo $NOTE_NAME
 
 # URL-encode the file path
 ENCODED_FILEPATH=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$FILEPATH'))")
@@ -34,5 +37,6 @@ ENCODED_FILEPATH=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$F
 # Construct the Obsidian URI
 URL="obsidian://advanced-uri?vault=$OBSIDIAN_VAULT_NAME&filepath=$ENCODED_FILEPATH"
 
-# Open the note in Obsidian
+
+# # Open the note in Obsidian
 open "$URL"
