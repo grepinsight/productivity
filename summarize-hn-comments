@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+VERSION="1.0.0"
+
+# Default values
+URL="https://news.ycombinator.com/item?id=42838700"
+OUTPUT_FORMAT="html2markdown"
+AI_MODEL="gemini-2.0-flash-exp"
+
+print_help() {
+    echo "Usage: $0 [OPTIONS]"
+    echo "Summarize Hacker News comments using AI."
+    echo
+    echo "Options:"
+    echo "  -u, --url URL          Specify the Hacker News item URL"
+    echo "  -f, --format FORMAT    Specify the output format (default: html2markdown)"
+    echo "  -m, --model MODEL      Specify the AI model (default: gemini-2.0-flash-exp)"
+    echo "  -h, --help             Display this help message"
+    echo "  -v, --version          Display version information"
+}
+
+print_version() {
+    echo "summarize-hm-comments version $VERSION"
+}
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -u|--url)
+            URL="$2"
+            shift 2
+            ;;
+        -f|--format)
+            OUTPUT_FORMAT="$2"
+            shift 2
+            ;;
+        -m|--model)
+            AI_MODEL="$2"
+            shift 2
+            ;;
+        -h|--help)
+            print_help
+            exit 0
+            ;;
+        -v|--version)
+            print_version
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            print_help
+            exit 1
+            ;;
+    esac
+done
+
+# Main script execution
+curl --no-progress-meter "$URL" | "$OUTPUT_FORMAT" | fabric -p summarize -m "$AI_MODEL"
