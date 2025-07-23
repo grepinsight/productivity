@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+
+# if the readme file exists, then open it
+# If not, create it and open it
+
+
+if [[ ! -f README.md ]]; then
+  echo "# Project Title" > README.md
+  echo "A brief description of your project." >> README.md
+  echo "" >> README.md
+  echo "## Installation" >> README.md
+  echo "Instructions for installing the project." >> README.md
+  echo "" >> README.md
+  echo "## Usage" >> README.md
+  echo "Instructions for using the project." >> README.md
+fi
+
+
+nvim README.md
