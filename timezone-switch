@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Script to toggle between KST and PST timezones on macOS
+# Usage: ./timezone-toggle.sh
+
+# Get current timezone
+CURRENT_TZ=$(sudo systemsetup -gettimezone | awk '{print $3}')
+
+# Define our timezones
+KST="Asia/Seoul"
+PST="America/Los_Angeles"
+
+# Toggle between timezones
+if [[ "$CURRENT_TZ" == "$KST" ]]; then
+    # Currently KST, switch to PST
+    echo "Switching from KST to PST..."
+    sudo systemsetup -settimezone "$PST"
+    NEW_TZ="PST"
+else
+    # Currently something else, switch to KST
+    echo "Switching to KST..."
+    sudo systemsetup -settimezone "$KST"
+    NEW_TZ="KST"
+fi
+
+# Verify the change
+echo "Timezone has been changed to $NEW_TZ"
+date
+
+# Notification for visual confirmation
+osascript -e "display notification \"Timezone changed to $NEW_TZ\" with title \"Timezone Toggle\""

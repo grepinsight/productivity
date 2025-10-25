@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+echo "Fd Command"
+fd $@
+
+echo ""
+
+echo "RG command"
+rg $@
+
