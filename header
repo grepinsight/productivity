@@ -2,4 +2,4 @@
 
 
 
-head -2 $@ | datamash transpose | tr '\t' ',' | csvlook
+head -2 $@ | datamash transpose | tr '\t' ',' | xsv table
