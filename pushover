@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Your Pushover API token and user key
+# PUSHOVER_API_TOKEN="YOUR_API_TOKEN"
+# PUSHOVER_USER_KEY="YOUR_USER_KEY"
+
+# Check for message argument
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <message>"
+    exit 1
+fi
+
+MESSAGE="$1"
+
+# Send the notification via curl
+curl -s \
+     --form-string "token=$PUSHOVER_API_TOKEN" \
+     --form-string "user=$PUSHOVER_USER_KEY" \
+     --form-string "message=$MESSAGE" \
+     https://api.pushover.net/1/messages.json
+
+# Check curl's exit status
+if [ "$?" -eq 0 ]; then
+    echo "Notification sent successfully!"
+else
+    echo "Failed to send notification!"
+    exit 2
+fi
+
